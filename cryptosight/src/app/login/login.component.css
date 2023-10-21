@@ -4,6 +4,11 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+label {
+    color: #CB9B45;
+    margin-bottom: 1%;
+}
+
 .card {
     background-color: #082335;
     border: none;
@@ -13,23 +18,28 @@ body {
 
 .card-logo {
     display: block;
-    margin: 20px auto;
-    max-width: 250px;  
+    margin: 1% auto;
+    max-width: 90%;  
     height: auto;
+}
+
+.card-header, .card-body {
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-top: 0%
 }
 
 .card-header, .card-footer {
     background-color: #082335;
     border: none;
-    color: #CB9B45;
-    padding: 15px;
+    color: #BA8A3B;
 }
 
+
 .input-group {
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 2%;
 }
 
 .input-group-text {

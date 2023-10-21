@@ -3,46 +3,55 @@
         <div class="col-md-6">
             <div class="card">
                 <img src="assets/logo.png" class="card-logo">
-                <div class="card-header text-center">
+                <div class="card-header text-left">
                 </div>
                 <div class="card-body">
                     <form (ngSubmit)="login(f)" #f="ngForm">
-                        <div class="mb-3 input-group">
-                            <span class="input-group-text" id="email-addon">
-                                <i class="fa fa-envelope fa-sm"></i>
-                            </span>
-                            <input 
-                                type="email" 
-                                class="form-control" 
-                                id="email" 
-                                placeholder="Email" 
-                                aria-describedby="email-addon"
-                                name="email-value"
-                                ngModel
-                                required
-                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                            >
+                        
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="email-addon">
+                                    <i class="fa fa-envelope fa-sm"></i>
+                                </span>
+                                <input 
+                                    type="email" 
+                                    class="form-control" 
+                                    id="email" 
+                                    placeholder="Enter your email" 
+                                    aria-describedby="email-addon"
+                                    name="email-value"
+                                    ngModel
+                                    required
+                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                                >
+                            </div>
                         </div>
-                        <div class="mb-3 input-group">
-                            <span class="input-group-text" id="password-addon">
-                                <i class="fa fa-lock fa-sm"></i>
-                            </span>
-                            <input 
-                                type="password" 
-                                class="form-control" 
-                                id="password" 
-                                placeholder="Password" 
-                                aria-describedby="password-addon"
-                                name="password-value"
-                                ngModel
-                                required
-                            >
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="password-addon">
+                                    <i class="fa fa-lock fa-sm"></i>
+                                </span>
+                                <input 
+                                    type="password" 
+                                    class="form-control" 
+                                    id="password" 
+                                    placeholder="Enter your password" 
+                                    aria-describedby="password-addon"
+                                    name="password-value"
+                                    ngModel
+                                    required
+                                >
+                            </div>
                         </div>
+                        
                         <button 
                             type="submit" 
                             [disabled]="!f.valid"
                             class="btn btn-primary w-50">
-                            Login
+                            LOGIN
                         </button>
                     </form>
                 </div>
