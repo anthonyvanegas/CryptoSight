@@ -1,0 +1,61 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center">
+                    Login
+                </div>
+                <div class="card-body">
+                    <form (ngSubmit)="login(f)" #f="ngForm">
+                        <div class="mb-3 input-group">
+                            <span class="input-group-text" id="email-addon">
+                                <i class="fa fa-envelope fa-sm"></i>
+                            </span>
+                            <input 
+                                type="email" 
+                                class="form-control" 
+                                id="email" 
+                                placeholder="Email" 
+                                aria-describedby="email-addon"
+                                name="email-value"
+                                ngModel
+                                required
+                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                            >
+                            <div *ngIf="f.form.controls['email-value'].invalid && (f.form.controls['email-value'].dirty || f.form.controls['email-value'].touched)" class="text-danger">
+                                Email is required.
+                            </div>
+                        </div>
+                        <div class="mb-3 input-group">
+                            <span class="input-group-text" id="password-addon">
+                                <i class="fa fa-lock fa-sm"></i>
+                            </span>
+                            <input 
+                                type="password" 
+                                class="form-control" 
+                                id="password" 
+                                placeholder="Password" 
+                                aria-describedby="password-addon"
+                                name="password-value"
+                                ngModel
+                                required
+                            >
+                            <div *ngIf="f.form.controls['password-value'].invalid && (f.form.controls['password-value'].dirty || f.form.controls['password-value'].touched)" class="text-danger">
+                                Password is required.
+                            </div>
+                        </div>
+                        <button 
+                            type="submit" 
+                            [disabled]="!f.valid"
+                            class="btn btn-primary w-100">
+                            Login
+                        </button>
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    Not a member? <a href="#">Sign Up Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

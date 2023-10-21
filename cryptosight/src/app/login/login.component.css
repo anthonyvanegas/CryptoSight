@@ -1,0 +1,51 @@
+body {
+    background-color: #282c36;
+    color: #e1e1e1;
+    font-family: 'Arial', sans-serif;
+}
+
+.card {
+    background-color: #393e49;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.card-header, .card-footer {
+    background-color: #282c36;
+    border: none;
+    color: #e1e1e1;
+}
+
+.input-group-text {
+    background-color: #282c36;
+    border: none;
+    color: #e1e1e1;
+}
+
+.btn-primary {
+    background-color: #e57373;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: #d43f3f;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+a {
+    color: #e57373;
+}
+
+a:hover, a:focus {
+    text-decoration: underline;
+}
+
+.text-danger {
+    padding:10px
+}
+
+.ng-invalid.ng-touched {
+    border-color: red;
+}
