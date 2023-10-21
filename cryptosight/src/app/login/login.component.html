@@ -2,8 +2,8 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
+                <img src="assets/logo.png" class="card-logo">
                 <div class="card-header text-center">
-                    Login
                 </div>
                 <div class="card-body">
                     <form (ngSubmit)="login(f)" #f="ngForm">
@@ -22,9 +22,6 @@
                                 required
                                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                             >
-                            <div *ngIf="f.form.controls['email-value'].invalid && (f.form.controls['email-value'].dirty || f.form.controls['email-value'].touched)" class="text-danger">
-                                Email is required.
-                            </div>
                         </div>
                         <div class="mb-3 input-group">
                             <span class="input-group-text" id="password-addon">
@@ -40,17 +37,20 @@
                                 ngModel
                                 required
                             >
-                            <div *ngIf="f.form.controls['password-value'].invalid && (f.form.controls['password-value'].dirty || f.form.controls['password-value'].touched)" class="text-danger">
-                                Password is required.
-                            </div>
                         </div>
                         <button 
                             type="submit" 
                             [disabled]="!f.valid"
-                            class="btn btn-primary w-100">
+                            class="btn btn-primary w-50">
                             Login
                         </button>
                     </form>
+                </div>
+                <div *ngIf="f.form.controls['email-value'].invalid && (f.form.controls['email-value'].dirty || f.form.controls['email-value'].touched)" class="text-danger">
+                    Email is required.
+                </div>
+                <div *ngIf="f.form.controls['password-value'].invalid && (f.form.controls['password-value'].dirty || f.form.controls['password-value'].touched)" class="text-danger">
+                    Password is required.
                 </div>
                 <div class="card-footer text-center">
                     Not a member? <a href="#">Sign Up Now</a>
