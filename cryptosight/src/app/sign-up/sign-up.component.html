@@ -1,0 +1,102 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <mat-card>
+                <img mat-card-image src="assets/logo.png">
+
+                <mat-card-header>
+                    <mat-card-title>Signup</mat-card-title>
+                </mat-card-header>
+
+                <mat-card-content>
+                    <form (submit)="signup(f)" #f="ngForm">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>First Name</mat-label>
+                            <input 
+                                matInput 
+                                type="first-name" 
+                                id="first-name" 
+                                placeholder="Enter your first name" 
+                                name="first-name"
+                                ngModel
+                                required
+                                pattern="^[A-Za-z\s]+$"
+                            >
+                            <mat-icon matPrefix>person</mat-icon>
+                            </mat-form-field>
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Last Name</mat-label>
+                                <input 
+                                    matInput 
+                                    type="last-name" 
+                                    id="last-name" 
+                                    placeholder="Enter your last name" 
+                                    name="last-name"
+                                    ngModel
+                                    required
+                                    pattern="^[A-Za-z\s]+$"
+                                >
+                                <mat-icon matPrefix>person</mat-icon>
+                                </mat-form-field>
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Email</mat-label>
+                                <input 
+                                    matInput 
+                                    type="email" 
+                                    id="email" 
+                                    placeholder="Enter your email" 
+                                    name="email"
+                                    ngModel
+                                    required
+                                    pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                                >
+                                <mat-icon matPrefix>email</mat-icon>
+                            </mat-form-field>
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Password</mat-label>
+                                <input 
+                                    matInput 
+                                    type="password" 
+                                    id="password" 
+                                    placeholder="Enter your password" 
+                                    name="password"
+                                    [(ngModel)]="user.password"
+                                    required
+                                >
+                                <mat-icon matPrefix>lock</mat-icon>
+                            </mat-form-field>
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Confirm Password</mat-label>
+                                <input 
+                                    matInput 
+                                    type="password" 
+                                    id="confirmPassword" 
+                                    placeholder="Confirm password" 
+                                    name="confirmPassword"
+                                    [disabled]="user.password == ''"
+                                    [(ngModel)]="user.confirmPassword"
+                                    required
+                                >
+                                <mat-icon matPrefix>lock</mat-icon>
+                            </mat-form-field>
+                            <mat-error *ngIf="(user.confirmPassword !== user.password)">Passwords must match!</mat-error>
+
+                            <button 
+                                mat-raised-button 
+                                color="primary" 
+                                type="submit" 
+                                [disabled]="!f.valid || (user.confirmPassword !== user.password)"
+                                >
+                                SIGNUP
+                            </button>
+                    </form>
+                </mat-card-content>
+                
+                <mat-card-actions>
+                    <span class="spacer"></span>
+                    Not a member? <a href="#">   Sign Up Now</a>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</div>

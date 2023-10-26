@@ -56,12 +56,6 @@
                     <span class="spacer"></span>
                     Not a member? <a href="#">   Sign Up Now</a>
                 </mat-card-actions>
-                <div *ngIf="f.form.controls['email'].invalid && (f.form.controls['email'].dirty || f.form.controls['email'].touched)" class="text-danger">
-                    Email is required.
-                </div>
-                <div *ngIf="f.form.controls['password'].invalid && (f.form.controls['password'].dirty || f.form.controls['password'].touched)" class="text-danger">
-                    Password is required.
-                </div>
             </mat-card>
         </div>
     </div>

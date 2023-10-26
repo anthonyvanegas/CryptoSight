@@ -7,6 +7,20 @@ a:hover, a:focus {
     text-decoration: underline;
 }
 
+mat-card-header {
+    justify-content: center;
+    margin: 2%;
+}
+
+mat-error {
+    margin-left: 1%;
+    margin-bottom: 4%;
+}
+
+mat-card {
+    margin-bottom: 3%;
+}
+
 .text-danger {
     display: block;
     margin-left: auto;
