@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { HttpClientModule } from '@angular/common/http';
 
 import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
@@ -29,7 +30,8 @@ import { HeaderComponent } from './header/header.component';
     MatInputModule,       
     MatIconModule,        
     MatButtonModule,
-    MatToolbarModule    
+    MatToolbarModule,
+    HttpClientModule   
   ],
   providers: [],
   bootstrap: [AppComponent]

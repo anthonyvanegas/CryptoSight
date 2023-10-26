@@ -1,2 +1,22 @@
+a {
+    color: #CB9B45;
+    padding-left: 0.5em;
+}
+
+a:hover, a:focus {
+    text-decoration: underline;
+}
+
+.text-danger {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2%
+}
+
+.ng-invalid.ng-touched {
+    border-color: red;
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
