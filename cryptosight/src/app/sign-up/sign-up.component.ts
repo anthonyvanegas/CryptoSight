@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { SignupUser } from './signup-user.model';
 
 @Component({
   selector: 'app-sign-up',
@@ -8,17 +9,15 @@ import { NgForm } from '@angular/forms';
 })
 
 export class SignUpComponent {
+  user: SignupUser = new SignupUser();
 
-  user = {
-    password: '',
-    confirmPassword: ''
-  };
-
-  isPasswordMatch = this.user.password === this.user.confirmPassword;
+  get isPasswordMatch(): boolean {
+    return this.user.password === this.user.confirmPassword;
+  }
 
   signup(form: NgForm): void {
     if (this.isPasswordMatch && form.valid) {
-      
+        
     }
   }
 }

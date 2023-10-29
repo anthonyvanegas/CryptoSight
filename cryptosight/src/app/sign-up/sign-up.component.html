@@ -18,7 +18,7 @@
                                 id="first-name" 
                                 placeholder="Enter your first name" 
                                 name="first-name"
-                                ngModel
+                                [(ngModel)]="user.firstname"
                                 required
                                 pattern="^[A-Za-z\s]+$"
                             >
@@ -32,7 +32,7 @@
                                     id="last-name" 
                                     placeholder="Enter your last name" 
                                     name="last-name"
-                                    ngModel
+                                    [(ngModel)]="user.lastname"
                                     required
                                     pattern="^[A-Za-z\s]+$"
                                 >
@@ -46,7 +46,7 @@
                                     id="email" 
                                     placeholder="Enter your email" 
                                     name="email"
-                                    ngModel
+                                    [(ngModel)]="user.email"
                                     required
                                     pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
                                 >
@@ -94,7 +94,7 @@
                 
                 <mat-card-actions>
                     <span class="spacer"></span>
-                    Not a member? <a href="#">   Sign Up Now</a>
+                    Already a member? <a href="#">   Login Now</a>
                 </mat-card-actions>
             </mat-card>
         </div>
