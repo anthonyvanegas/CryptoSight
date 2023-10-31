@@ -15,14 +15,13 @@ export class SignUpComponent {
   constructor(public usersService: UserService) {}
 
   signup(form: NgForm): void {
-    if ((form.value.confirmPassword !== form.value.password) && form.valid) {
+    if ((form.value.confirmPassword == form.value.password) && form.valid) {
       const user: User = {
         firstname: form.value.firstname,
         lastname: form.value.lastname,
         email: form.value.email,
         password: form.value.password
       };
-      this.usersService.addUser(user);
     }
   }
 }
