@@ -80,7 +80,7 @@
                                 <mat-icon matPrefix>lock</mat-icon>
                             </mat-form-field>
                             <mat-error *ngIf="(f.value.confirmPassword !== f.value.password) && f.value.password !== ''">Passwords must match!</mat-error>
-
+                            <mat-error *ngIf="isNewUser == true">User already created!</mat-error>
                             <button 
                                 mat-raised-button 
                                 color="primary" 

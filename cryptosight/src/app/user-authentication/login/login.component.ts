@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(public userService: UserService) {}
 
   ngOnInit() {
-    this.users = this.userService.getUsers();
+    this.userService.getUsers();
     this.usersSub = this.userService.getUsersUpdateListener().subscribe((users: User[]) => {
         this.users = users;
     });

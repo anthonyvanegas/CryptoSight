@@ -1,10 +1,8 @@
-const express = require('express');
-const app = express();
+// From Maximilian Schwarzmüller (https://www.udemy.com/course/angular-2-and-nodejs-the-practical-guide/)
 
-const mongoose = require('mongoose');
+const app = require("./backend/app");
 const debug = require("debug")("node-angular");
 const http = require("http");
-const cors = require('cors');
 
 const normalizePort = val => {
   var port = parseInt(val, 10);
@@ -53,18 +51,4 @@ app.set("port", port);
 const server = http.createServer(app);
 server.on("error", onError);
 server.on("listening", onListening);
-
-mongoose.connect('mongodb+srv://anth12345250:2Chainz@cluster0.upfww4n.mongodb.net/CryptoSight', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-    }).then(() => {
-        console.log("Database connected!")
-    }).catch((() => {
-        console.log("Connection failed!")
-}));
-
-app.use(cors());
-
-app.listen(port, () => {
-    console.log(`Server started on port ${port}`);
-});
+server.listen(port);
