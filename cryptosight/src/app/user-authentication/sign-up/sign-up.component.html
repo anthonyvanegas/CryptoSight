@@ -18,7 +18,7 @@
                                 id="first-name" 
                                 placeholder="Enter your first name" 
                                 name="first-name"
-                                [(ngModel)]="user.firstname"
+                                ngModel
                                 required
                                 pattern="^[A-Za-z\s]+$"
                             >
@@ -32,7 +32,7 @@
                                     id="last-name" 
                                     placeholder="Enter your last name" 
                                     name="last-name"
-                                    [(ngModel)]="user.lastname"
+                                    ngModel
                                     required
                                     pattern="^[A-Za-z\s]+$"
                                 >
@@ -46,7 +46,7 @@
                                     id="email" 
                                     placeholder="Enter your email" 
                                     name="email"
-                                    [(ngModel)]="user.email"
+                                    ngModel
                                     required
                                     pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
                                 >
@@ -60,7 +60,7 @@
                                     id="password" 
                                     placeholder="Enter your password" 
                                     name="password"
-                                    [(ngModel)]="user.password"
+                                    ngModel
                                     required
                                 >
                                 <mat-icon matPrefix>lock</mat-icon>
@@ -73,19 +73,19 @@
                                     id="confirmPassword" 
                                     placeholder="Confirm password" 
                                     name="confirmPassword"
-                                    [disabled]="user.password == ''"
-                                    [(ngModel)]="user.confirmPassword"
+                                    [disabled]="f.value.password == ''"
+                                    ngModel
                                     required
                                 >
                                 <mat-icon matPrefix>lock</mat-icon>
                             </mat-form-field>
-                            <mat-error *ngIf="(user.confirmPassword !== user.password)">Passwords must match!</mat-error>
+                            <mat-error *ngIf="(f.value.confirmPassword !== f.value.password) && f.value.password !== ''">Passwords must match!</mat-error>
 
                             <button 
                                 mat-raised-button 
                                 color="primary" 
                                 type="submit" 
-                                [disabled]="!f.valid || (user.confirmPassword !== user.password)"
+                                [disabled]="!f.valid || (f.value.confirmPassword !== f.value.password)"
                                 >
                                 SIGNUP
                             </button>

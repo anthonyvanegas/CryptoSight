@@ -12,9 +12,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
 
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './user-authentication/login/login.component';
 import { HeaderComponent } from './header/header.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
+import { SignUpComponent } from './user-authentication/sign-up/sign-up.component';
+import { UserService } from './user-authentication/user.service';
 
 @NgModule({
   declarations: [
