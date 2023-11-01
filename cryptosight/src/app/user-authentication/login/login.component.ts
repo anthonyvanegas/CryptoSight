@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 export class LoginComponent implements OnInit, OnDestroy {
   users: User[] = [];
   private usersSub: Subscription = new Subscription;
+  private userState: boolean = true;
 
   constructor(public userService: UserService) {}
 
@@ -23,12 +24,23 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
+  get isExistingUser(): boolean {
+    return this.userState;
+  }
+
+  set isExistingUser(userExist: boolean) {
+    this.userState = userExist;
+  }
+
   ngOnDestroy() {
     this.usersSub.unsubscribe();
   }
 
   login(form: NgForm) {
-      console.log(form.value.email)
-      console.log(form.value.password)
+    this.isExistingUser = this.users.some(existingUser => (existingUser.email === form.value.email) && (existingUser.password === form.value.password));
+    if (form.valid && this.isExistingUser == true) {
+      console.log('Login Successful!')
+      form.resetForm();
+    }
   }
 }

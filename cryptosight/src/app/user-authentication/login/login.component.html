@@ -25,7 +25,6 @@
                             >
                             <mat-icon matPrefix>email</mat-icon>
                         </mat-form-field>
-
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Password</mat-label>
                             <input 
@@ -39,7 +38,7 @@
                             >
                             <mat-icon matPrefix>lock</mat-icon>
                         </mat-form-field>
-
+                        <mat-error *ngIf="isExistingUser == false">Email or password incorrect!</mat-error>
                         <button 
                             mat-raised-button 
                             color="primary" 
