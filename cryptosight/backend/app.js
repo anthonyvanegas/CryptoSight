@@ -30,9 +30,11 @@ app.post('/api/users', (req, res, next) => {
         email: req.body.email,
         password: req.body.password
     });
-    user.save();
-    res.status(201).json({
-        message: 'User added successfully'
+    user.save().then(createdUser => {
+        res.status(201).json({
+            message: 'User added successfully',
+            userId: createdUser._id
+        });
     });
 });
 

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from './user.model'
 import { Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({providedIn: 'root'})
 export class UserService {
@@ -11,9 +12,22 @@ export class UserService {
     constructor(private http: HttpClient) {}
 
     getUsers() {
-        this.http.get<{message: string, users: User[]}>('http://localhost:3000/api/users')
-        .subscribe((userData) => {
-            this.users = userData.users;
+        this.http.get<{message: string, users: any}>(
+            'http://localhost:3000/api/users'
+        )
+        .pipe(map((userData) => {
+            return userData.users.map((user: { firstname: any; lastname: any; email: any; password: any; _id: any; }) => {
+                return {
+                    firstname: user.firstname,
+                    lastname: user.lastname,
+                    email: user.email,
+                    password: user.password,
+                    id: user._id
+                };
+            });
+        }))
+        .subscribe((transformedUsers) => {
+            this.users = transformedUsers;
             this.usersUpdated.next([...this.users]);
         });
     }
@@ -23,7 +37,13 @@ export class UserService {
     }
 
     addUser(user: User) {
-        this.users.push(user)
-        this.usersUpdated.next([...this.users])
+        this.http
+            .post<{message: string, postId: string }>('http://localhost:3000/api/users', user)
+            .subscribe(responseData => {
+                const id = responseData.postId;
+                user.id = id;
+                this.users.push(user)
+                this.usersUpdated.next([...this.users])
+            });
     }
 }
