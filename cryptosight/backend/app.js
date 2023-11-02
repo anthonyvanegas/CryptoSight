@@ -1,12 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const fs = require('fs');
 
 const User = require('./models/User');
 
 const app = express();
-// c53O53GQ2q0Jw0h4
-mongoose.connect('mongodb+srv://anth12345250:c53O53GQ2q0Jw0h4@cluster0.upfww4n.mongodb.net/?retryWrites=true')
+
+mongoose.connect(JSON.parse(fs.readFileSync('./config.json')).dbCred)
     .then(() => {
         console.log("Database connected")
     })
@@ -46,5 +47,7 @@ app.get('/api/users', (req, res, next) => {
         });
     });
 });
+
+const burl = 
 
 module.exports = app;

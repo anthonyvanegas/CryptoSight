@@ -1,3 +1,13 @@
+html, body { 
+    height: 100%; 
+}
+
+body { 
+    margin: 0; 
+    font-family: Roboto, 
+    "Helvetica Neue", sans-serif; 
+}
+
 a {
     color: #CB9B45;
     padding-left: 0.5em;
@@ -31,6 +41,3 @@ mat-card {
 .ng-invalid.ng-touched {
     border-color: red;
 }
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

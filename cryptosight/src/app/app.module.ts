@@ -11,10 +11,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
+import { MatTableModule } from '@angular/material/table';
 
 import { LoginComponent } from './user-authentication/login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { SignUpComponent } from './user-authentication/sign-up/sign-up.component';
+import { DashboardComponent } from './dashboard/main-screen/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { SignUpComponent } from './user-authentication/sign-up/sign-up.component
     LoginComponent,
     HeaderComponent,
     SignUpComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +36,7 @@ import { SignUpComponent } from './user-authentication/sign-up/sign-up.component
     MatIconModule,        
     MatButtonModule,
     MatToolbarModule,
+    MatTableModule,
     HttpClientModule   
   ],
   providers: [],

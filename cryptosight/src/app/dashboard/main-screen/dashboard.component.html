@@ -1,0 +1,55 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <mat-card>
+
+        <mat-toolbar class="dashboard-toolbar">
+          <button mat-icon-button type="button" (click)="logout()">
+            <mat-icon>logout</mat-icon>
+          </button>
+        </mat-toolbar>
+
+        <mat-card-header>
+          <mat-card-title>Crypto Prices</mat-card-title>
+          <mat-card-subtitle>Real-time market data for popular cryptocurrencies</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content class="row justify-content-center">
+          <mat-form-field appearance="outline" class="dashboard-search-bar">
+            <mat-label>Search for a cryptocurrency</mat-label>
+            <input matInput type="text" placeholder="Enter a cryptocurrency name">
+          </mat-form-field>
+
+          <mat-table [dataSource]="assets">
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+              <mat-cell *matCellDef="let asset">{{asset.name}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="price">
+              <mat-header-cell *matHeaderCellDef>Price (USD)</mat-header-cell>
+              <mat-cell *matCellDef="let asset">{{asset.price}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="change24h">
+              <mat-header-cell *matHeaderCellDef>Change (24h)</mat-header-cell>
+              <mat-cell *matCellDef="let asset">{{asset.change24h}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+              <mat-header-cell *matHeaderCellDef>View</mat-header-cell>
+              <mat-cell *matCellDef="let asset">
+                <button mat-icon-button (click)="viewAssetDetails(asset)">
+                  <mat-icon>arrow_forward</mat-icon>
+                </button>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let asset; columns: displayedColumns"></mat-row>
+          </mat-table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
