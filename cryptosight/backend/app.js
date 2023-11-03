@@ -5,6 +5,7 @@ const fs = require('fs');
 const axios = require('axios');
 
 const User = require('./models/User');
+const AvailableAsset = require('./models/availableasset');
 
 const app = express();
 
@@ -16,14 +17,14 @@ mongoose.connect(JSON.parse(fs.readFileSync('./config.json')).dbCred)
         console.log("Database connection failed")
 });
 
-async function getAssetData(slug) {
+async function getAssetData(symbol) {
     const apiKey = JSON.parse(fs.readFileSync('./config.json')).apiKey;
     const response = await axios.get('https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest', {
       headers: {
         'X-CMC_PRO_API_KEY': apiKey,
       },
       params: {
-        'slug': slug
+        'symbol': symbol
       }
     });
   
@@ -41,72 +42,80 @@ app.use((req, res, next) => {
 });
 
 app.post('/api/users', (req, res, next) => {
-    const user = new User({
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        email: req.body.email,
-        password: req.body.password
+  const user = new User({
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
+    email: req.body.email,
+    password: req.body.password
+  });
+  user.save().then(createdUser => {
+    res.status(201).json({
+      message: 'User added successfully',
+      userId: createdUser._id
     });
-    user.save().then(createdUser => {
-        res.status(201).json({
-            message: 'User added successfully',
-            userId: createdUser._id
-        });
-    });
+  });
 });
 
 app.get('/api/users', (req, res, next) => {
-    User.find().then(documents => {
-        res.status(200).json({
-            message: 'Users fetched successfully',
-            users: documents
-        });
+  User.find().then(documents => {
+    res.status(200).json({
+      message: 'Users fetched successfully',
+      users: documents
     });
+  });
+});
+
+app.get('/api/assets/available', (req, res, next) => {
+  AvailableAsset.find().then(documents => {
+    res.status(200).json({
+      message: 'Available assets fetched successfully',
+      assetNames: documents
+    });
+  });
 });
 
 app.get('/api/assets', async (req, res, next) => {
-    try {
-      const response = await getAssetData(req.query.slug);
-  
-      res.status(200).json({
-        message: 'Users fetched successfully',
-        response: response,
-        data: JSON.stringify(Object.values(response.data))
-      });
-    } catch (error) {
-      switch (error.response.status) {
-        case 400:
-          res.status(400).json({
-            message: 'Bad Request'
-          });
-          break;
-        case 401:
-          res.status(401).json({
-            message: 'Unauthorized'
-          });
-          break;
-        case 403:
-          res.status(403).json({
-            message: 'Forbidden'
-          });
-          break;
-        case 429:
-          res.status(429).json({
-            message: 'Too Many Requests'
-          });
-          break;
-        case 500:
-          res.status(500).json({
-            message: 'Internal Server Error'
-          });
-          break;
-        default:
-          res.status(500).json({
-            message: 'Unknown Error'
-          });
-          break;
-      }
+  try {
+    const response = await getAssetData(req.query.symbolQuery);
+
+    res.status(200).json({
+      message: 'Asset(s) fetched successfully',
+      response: response
+    });
+  } catch (error) {
+    switch (error.response.status) {
+      case 400:
+        res.status(400).json({
+          message: 'Bad Request'
+        });
+        break;
+      case 401:
+        res.status(401).json({
+          message: 'Unauthorized'
+        });
+        break;
+      case 403:
+        res.status(403).json({
+          message: 'Forbidden'
+        });
+        break;
+      case 429:
+        res.status(429).json({
+          message: 'Too Many Requests'
+        });
+        break;
+      case 500:
+        res.status(500).json({
+          message: 'Internal Server Error'
+        });
+        break;
+      default:
+        res.status(500).json({
+          message: 'Unknown Error'
+        });
+        break;
     }
+  }
 });
 
 module.exports = app;

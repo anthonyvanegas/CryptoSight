@@ -12,15 +12,16 @@ import { MatTableDataSource } from '@angular/material/table';
 
 export class MainscreenComponent implements OnInit, OnDestroy{
   assets: Asset[] = [];
+  symbols: string[] = [];
   private assetsSub: Subscription = new Subscription;
-  displayedColumns: string[] = ['rank', 'name', 'price', 'change24h', 'action'];
+  displayedColumns: string[] = ['rank', 'symbol', 'name', 'price', 'change24h', 'action'];
   assetsDataSource: MatTableDataSource<Asset> = new MatTableDataSource<Asset>;
 
   constructor(public assetService: AssetService) {}
 
   ngOnInit() {
-    this.assetService.getAssets("bitcoin,ethereum,cosmos");
-    this.assetService.startPolling;
+    this.symbols = ["BTC", "ETH"];
+    this.assetService.loadAssets(this.symbols);
     this.assetsSub = this.assetService.getAssetsUpdateListener()
       .subscribe((assets: Asset[]) => {
         this.assets = assets;

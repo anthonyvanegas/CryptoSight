@@ -1,6 +1,3 @@
-export interface Asset{
-    rank: number;
+export interface AvailableAsset{
     name: string;
-    price: number;
-    change24h: number;
 }
