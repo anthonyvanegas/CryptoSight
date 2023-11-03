@@ -5,21 +5,21 @@ import { Subscription } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  selector: 'app-main-screen',
+  templateUrl: './main-screen.component.html',
+  styleUrls: ['./main-screen.component.css']
 })
 
-export class DashboardComponent implements OnInit, OnDestroy{
+export class MainscreenComponent implements OnInit, OnDestroy{
   assets: Asset[] = [];
   private assetsSub: Subscription = new Subscription;
-  displayedColumns: string[] = ['name', 'price', 'change24h', 'action'];
+  displayedColumns: string[] = ['rank', 'name', 'price', 'change24h', 'action'];
   assetsDataSource: MatTableDataSource<Asset> = new MatTableDataSource<Asset>;
 
   constructor(public assetService: AssetService) {}
 
   ngOnInit() {
-    this.assets = this.assetService.getAssets();
+    this.assetService.getAssets("bitcoin,ethereum");
     this.assetsSub = this.assetService.getAssetsUpdateListener()
       .subscribe((assets: Asset[]) => {
         this.assets = assets;
@@ -33,9 +33,4 @@ export class DashboardComponent implements OnInit, OnDestroy{
   viewAssetDetails(asset: any) {
     console.log('Asset view clicked!', asset.name);
   }
-
-  logout() {
-    console.log('Logout button clicked!');
-  }
-
 }

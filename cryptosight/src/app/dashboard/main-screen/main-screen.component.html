@@ -1,13 +1,8 @@
 <div class="container mt-5">
   <div class="row justify-content-center">
-    <div class="col-md-6">
+    <div class="col-md-8">
       <mat-card>
-
-        <mat-toolbar class="dashboard-toolbar">
-          <button mat-icon-button type="button" (click)="logout()">
-            <mat-icon>logout</mat-icon>
-          </button>
-        </mat-toolbar>
+        <app-dashboard-header></app-dashboard-header>
 
         <mat-card-header>
           <mat-card-title>Crypto Prices</mat-card-title>
@@ -21,6 +16,11 @@
           </mat-form-field>
 
           <mat-table [dataSource]="assets">
+            <ng-container matColumnDef="rank">
+              <mat-header-cell *matHeaderCellDef>Rank</mat-header-cell>
+              <mat-cell *matCellDef="let asset">{{asset.rank}}</mat-cell>
+            </ng-container>
+
             <ng-container matColumnDef="name">
               <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
               <mat-cell *matCellDef="let asset">{{asset.name}}</mat-cell>
@@ -28,12 +28,16 @@
 
             <ng-container matColumnDef="price">
               <mat-header-cell *matHeaderCellDef>Price (USD)</mat-header-cell>
-              <mat-cell *matCellDef="let asset">{{asset.price}}</mat-cell>
+              <mat-cell *matCellDef="let asset" [ngClass]="{'change-positive': asset.change24h > 1, 'change-negative': asset.change24h < 1}">
+                ${{asset.price.toFixed(2)}}
+              </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="change24h">
               <mat-header-cell *matHeaderCellDef>Change (24h)</mat-header-cell>
-              <mat-cell *matCellDef="let asset">{{asset.change24h}}</mat-cell>
+              <mat-cell *matCellDef="let asset" [ngClass]="{'change-positive': asset.change24h > 1, 'change-negative': asset.change24h < 1}">
+                {{asset.change24h.toFixed(2)}}%
+              </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="action">
@@ -49,6 +53,7 @@
             <mat-row *matRowDef="let asset; columns: displayedColumns"></mat-row>
           </mat-table>
         </mat-card-content>
+        <app-dashboard-footer></app-dashboard-footer>
       </mat-card>
     </div>
   </div>

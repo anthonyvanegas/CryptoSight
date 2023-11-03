@@ -16,7 +16,9 @@ import { MatTableModule } from '@angular/material/table';
 import { LoginComponent } from './user-authentication/login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { SignUpComponent } from './user-authentication/sign-up/sign-up.component';
-import { DashboardComponent } from './dashboard/main-screen/dashboard.component';
+import { MainscreenComponent } from './dashboard/main-screen/main-screen.component';
+import { DashboardHeaderComponent } from './dashboard/dashboard-header/dashboard-header.component';
+import { DashboardFooterComponent } from './dashboard/dashboard-footer/dashboard-footer.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { DashboardComponent } from './dashboard/main-screen/dashboard.component'
     LoginComponent,
     HeaderComponent,
     SignUpComponent,
-    DashboardComponent
+    MainscreenComponent,
+    DashboardHeaderComponent,
+    DashboardFooterComponent
   ],
   imports: [
     BrowserModule,

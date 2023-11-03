@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const fs = require('fs');
+const axios = require('axios');
 
 const User = require('./models/User');
 
@@ -13,7 +14,22 @@ mongoose.connect(JSON.parse(fs.readFileSync('./config.json')).dbCred)
     })
     .catch(() => {
         console.log("Database connection failed")
+});
+
+async function getAssetData(slug) {
+    const apiKey = JSON.parse(fs.readFileSync('./config.json')).apiKey;
+    const response = await axios.get('https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest', {
+      headers: {
+        'X-CMC_PRO_API_KEY': apiKey,
+      },
+      params: {
+        'slug': slug
+      }
     });
+  
+    const json = response.data;
+    return json;
+}
 
 app.use(bodyParser.json());
 
@@ -48,6 +64,49 @@ app.get('/api/users', (req, res, next) => {
     });
 });
 
-const burl = 
+app.get('/api/assets', async (req, res, next) => {
+    try {
+      const response = await getAssetData(req.query.slug);
+  
+      res.status(200).json({
+        message: 'Users fetched successfully',
+        response: response,
+        data: JSON.stringify(Object.values(response.data))
+      });
+    } catch (error) {
+      switch (error.response.status) {
+        case 400:
+          res.status(400).json({
+            message: 'Bad Request'
+          });
+          break;
+        case 401:
+          res.status(401).json({
+            message: 'Unauthorized'
+          });
+          break;
+        case 403:
+          res.status(403).json({
+            message: 'Forbidden'
+          });
+          break;
+        case 429:
+          res.status(429).json({
+            message: 'Too Many Requests'
+          });
+          break;
+        case 500:
+          res.status(500).json({
+            message: 'Internal Server Error'
+          });
+          break;
+        default:
+          res.status(500).json({
+            message: 'Unknown Error'
+          });
+          break;
+      }
+    }
+});
 
 module.exports = app;
