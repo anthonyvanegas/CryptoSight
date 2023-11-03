@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Asset } from '../asset.model';
-import { AssetService } from '../asset.service';
+import { Asset } from '../../asset/asset.model';
+import { AssetService } from '../../asset/asset.service';
 import { Subscription } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -19,7 +19,8 @@ export class MainscreenComponent implements OnInit, OnDestroy{
   constructor(public assetService: AssetService) {}
 
   ngOnInit() {
-    this.assetService.getAssets("bitcoin,ethereum");
+    this.assetService.getAssets("bitcoin,ethereum,cosmos");
+    this.assetService.startPolling;
     this.assetsSub = this.assetService.getAssetsUpdateListener()
       .subscribe((assets: Asset[]) => {
         this.assets = assets;
