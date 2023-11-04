@@ -1,4 +1,5 @@
 import { Asset } from './asset.model';
+import { AvailableSymbol } from './available-symbol.model';
 import { Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -10,12 +11,16 @@ export class AssetService {
 
     constructor(private http: HttpClient) {}
 
-    loadAssets(symbols: string[]){
-        this.updateAssets(symbols);
+    loadAssets(symbols: AvailableSymbol[]){
+        let symbolList = []
+        for (const availableSymbol of symbols) {
+            symbolList.push(availableSymbol.symbol);
+        }
+        this.updateAssets(symbolList);
     }
 
-    addAssetToWatchlist(symbol: string){
-        this.updateAssets([symbol]);
+    addAssetToWatchlist(symbol: AvailableSymbol){
+        this.updateAssets([symbol.symbol]);
     }
 
     private updateAssets(symbols: string[]) {
@@ -31,13 +36,13 @@ export class AssetService {
             .get<{ message: string; response: any; }>('http://localhost:3000/api/assets', { params })
             .subscribe((returnedData) => {
                 for (const assetSymbol of symbols) {
-                    const assetData = returnedData.response[assetSymbol][0]
+                    const assetData = returnedData.response.data[assetSymbol][0]
                     this.assets.push({ 
                     symbol: assetData.symbol,
                     rank: assetData.cmc_rank,
                     name: assetData.name,
-                    price: assetData.quote.USD["price"], 
-                    change24h: assetData.quote.USD["percent_change_24h"]
+                    price: assetData.quote.USD.price, 
+                    change24h: assetData.quote.USD.percent_change_24h
                 });
             }
             this.assetsUpdated.next([...this.assets]);

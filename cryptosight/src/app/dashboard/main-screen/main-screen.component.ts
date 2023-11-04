@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Asset } from '../../asset/asset.model';
+import { AvailableSymbol } from '../../asset/available-symbol.model';
 import { AssetService } from '../../asset/asset.service';
+import { AvailableSymbolsService } from '../../asset/available-symbol.service';
 import { Subscription } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -12,16 +14,23 @@ import { MatTableDataSource } from '@angular/material/table';
 
 export class MainscreenComponent implements OnInit, OnDestroy{
   assets: Asset[] = [];
-  symbols: string[] = [];
+  symbols: AvailableSymbol[] = [];
   private assetsSub: Subscription = new Subscription;
+  private availableSymbolsSub: Subscription = new Subscription;
   displayedColumns: string[] = ['rank', 'symbol', 'name', 'price', 'change24h', 'action'];
   assetsDataSource: MatTableDataSource<Asset> = new MatTableDataSource<Asset>;
 
-  constructor(public assetService: AssetService) {}
+  constructor(public assetService: AssetService, public availableSymbolsService: AvailableSymbolsService) {}
 
   ngOnInit() {
-    this.symbols = ["BTC", "ETH"];
-    this.assetService.loadAssets(this.symbols);
+    this.availableSymbolsService.loadAvailableSymbols();
+
+    this.availableSymbolsSub = this.availableSymbolsService.getAvailableSymbolesUpdateListener()
+      .subscribe((symbols: AvailableSymbol[]) => {
+        this.symbols = symbols;
+        this.assetService.loadAssets(this.symbols);
+    });
+
     this.assetsSub = this.assetService.getAssetsUpdateListener()
       .subscribe((assets: Asset[]) => {
         this.assets = assets;
@@ -30,6 +39,7 @@ export class MainscreenComponent implements OnInit, OnDestroy{
 
   ngOnDestroy() {
     this.assetsSub.unsubscribe();
+    this.availableSymbolsSub.unsubscribe();
   }
 
   viewAssetDetails(asset: any) {

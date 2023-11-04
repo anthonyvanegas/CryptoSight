@@ -5,7 +5,7 @@ const fs = require('fs');
 const axios = require('axios');
 
 const User = require('./models/User');
-const AvailableAsset = require('./models/availableasset');
+const AvailableSymbol = require('./models/AvailableSymbol');
 
 const app = express();
 
@@ -27,7 +27,6 @@ async function getAssetData(symbol) {
         'symbol': symbol
       }
     });
-  
     const json = response.data;
     return json;
 }
@@ -65,11 +64,11 @@ app.get('/api/users', (req, res, next) => {
   });
 });
 
-app.get('/api/assets/available', (req, res, next) => {
-  AvailableAsset.find().then(documents => {
+app.get('/api/symbols', (req, res, next) => {
+  AvailableSymbol.find().then(documents => {
     res.status(200).json({
-      message: 'Available assets fetched successfully',
-      assetNames: documents
+      message: 'Available symbol(s) fetched successfully',
+      symbols: documents
     });
   });
 });
@@ -77,7 +76,6 @@ app.get('/api/assets/available', (req, res, next) => {
 app.get('/api/assets', async (req, res, next) => {
   try {
     const response = await getAssetData(req.query.symbolQuery);
-
     res.status(200).json({
       message: 'Asset(s) fetched successfully',
       response: response

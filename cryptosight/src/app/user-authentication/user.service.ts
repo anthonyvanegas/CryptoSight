@@ -12,9 +12,7 @@ export class UserService {
     constructor(private http: HttpClient) {}
 
     getUsers() {
-        this.http.get<{message: string, users: any}>(
-            'http://localhost:3000/api/users'
-        )
+        this.http.get<{message: string, users: any}>('http://localhost:3000/api/users')
         .pipe(map((userData) => {
             return userData.users.map((user: { firstname: any; lastname: any; email: any; password: any; _id: any; }) => {
                 return {
@@ -44,6 +42,6 @@ export class UserService {
                 user.id = id;
                 this.users.push(user)
                 this.usersUpdated.next([...this.users])
-            });
+        });
     }
 }
