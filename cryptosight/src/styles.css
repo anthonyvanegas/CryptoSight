@@ -41,3 +41,11 @@ mat-card {
 .ng-invalid.ng-touched {
     border-color: red;
 }
+
+.change-positive {
+    color: green;
+}
+  
+.change-negative {
+  color: red;
+}

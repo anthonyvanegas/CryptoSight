@@ -42,7 +42,9 @@ export class AssetService {
                     rank: assetData.cmc_rank,
                     name: assetData.name,
                     price: assetData.quote.USD.price, 
-                    change24h: assetData.quote.USD.percent_change_24h
+                    change24h: assetData.quote.USD.percent_change_24h,
+                    marketCap: assetData.quote.USD.market_cap,
+                    volume24h: assetData.quote.USD.volume_24h
                 });
             }
             this.assetsUpdated.next([...this.assets]);

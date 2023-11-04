@@ -1,1 +1,60 @@
-<p>asset-view works!</p>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <mat-card>
+          <app-dashboard-header></app-dashboard-header>
+  
+          <mat-card-header *ngIf="asset && asset.length > 0">
+            <mat-card-title>{{ asset[0].name }}</mat-card-title>
+            <mat-card-subtitle>Real-time market data for {{ asset[0].symbol }}</mat-card-subtitle>
+          </mat-card-header>
+  
+          <mat-card-content class="row justify-content-center">
+            <div class="row-md" *ngIf="asset && asset.length > 0">
+              <mat-card>
+                <mat-card-header>
+                  <mat-card-title>Current Price</mat-card-title>
+                </mat-card-header>
+                <mat-card-content [ngClass]="{'change-positive': asset[0].change24h > 0, 'change-negative': asset[0].change24h < 0}"> 
+                  <span id="current-price" class="row justify-content-center">${{ asset[0].price.toFixed(2)| number }}</span>
+                </mat-card-content>
+              </mat-card>
+            </div>
+            <div class="row-md" *ngIf="asset && asset.length > 0">
+              <mat-card>
+                <mat-card-header>
+                  <mat-card-title>24 Hour Change</mat-card-title>
+                </mat-card-header>
+                <mat-card-content [ngClass]="{'change-positive': asset[0].change24h > 0, 'change-negative': asset[0].change24h < 0}">
+                  <span id="24-hour-change" class="row justify-content-center">{{ asset[0].change24h.toFixed(2) }}%</span>
+                </mat-card-content>
+              </mat-card>
+            </div>
+            <div class="row-md" *ngIf="asset && asset.length > 0">
+              <mat-card>
+                <mat-card-header>
+                  <mat-card-title>Market Cap</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <span id="marketcap" class="row justify-content-center">${{ asset[0].marketCap.toFixed(0)| number }}</span>
+                </mat-card-content>
+              </mat-card>
+            </div>
+            <div class="row-md" *ngIf="asset && asset.length > 0">
+              <mat-card>
+                <mat-card-header>
+                  <mat-card-title>Volume (24 Hour)</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <span id="volume-24-hour" class="row justify-content-center">${{ asset[0].volume24h.toFixed(0)| number }}</span>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </mat-card-content>
+  
+          <app-dashboard-footer></app-dashboard-footer>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+  

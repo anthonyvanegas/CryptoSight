@@ -35,7 +35,7 @@
             <ng-container matColumnDef="price">
               <mat-header-cell *matHeaderCellDef>Price (USD)</mat-header-cell>
               <mat-cell *matCellDef="let asset" [ngClass]="{'change-positive': asset.change24h > 0, 'change-negative': asset.change24h < 0}">
-                ${{asset.price.toFixed(2)}}
+                ${{asset.price.toFixed(2)| number}}
               </mat-cell>
             </ng-container>
 
