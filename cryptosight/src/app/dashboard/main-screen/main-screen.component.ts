@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Asset } from '../../asset/asset.model';
-import { AvailableSymbol } from '../../asset/available-symbol.model';
-import { AssetService } from '../../asset/asset.service';
-import { AvailableSymbolsService } from '../../asset/available-symbol.service';
+import { Asset } from '../asset/asset.model';
+import { AvailableSymbol } from '../asset/available-symbol.model';
+import { AssetService } from '../asset/asset.service';
+import { AvailableSymbolsService } from '../asset/available-symbol.service';
 import { Subscription } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 

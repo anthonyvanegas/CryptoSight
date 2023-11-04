@@ -19,6 +19,7 @@ import { SignUpComponent } from './user-authentication/sign-up/sign-up.component
 import { MainscreenComponent } from './dashboard/main-screen/main-screen.component';
 import { DashboardHeaderComponent } from './dashboard/dashboard-header/dashboard-header.component';
 import { DashboardFooterComponent } from './dashboard/dashboard-footer/dashboard-footer.component';
+import { AssetViewComponent } from './dashboard/asset-view/asset-view.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { DashboardFooterComponent } from './dashboard/dashboard-footer/dashboard
     SignUpComponent,
     MainscreenComponent,
     DashboardHeaderComponent,
-    DashboardFooterComponent
+    DashboardFooterComponent,
+    AssetViewComponent
   ],
   imports: [
     BrowserModule,
