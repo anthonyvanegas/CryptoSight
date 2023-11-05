@@ -31,6 +31,10 @@ mat-card {
     margin-bottom: 3%;
 }
 
+mat-toolbar {
+    justify-content: center;
+}
+
 .text-danger {
     display: block;
     margin-left: auto;

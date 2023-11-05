@@ -20,6 +20,7 @@ import { MainscreenComponent } from './dashboard/main-screen/main-screen.compone
 import { DashboardHeaderComponent } from './dashboard/dashboard-header/dashboard-header.component';
 import { DashboardFooterComponent } from './dashboard/dashboard-footer/dashboard-footer.component';
 import { AssetViewComponent } from './dashboard/asset-view/asset-view.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { AssetViewComponent } from './dashboard/asset-view/asset-view.component'
     MainscreenComponent,
     DashboardHeaderComponent,
     DashboardFooterComponent,
-    AssetViewComponent
+    AssetViewComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
