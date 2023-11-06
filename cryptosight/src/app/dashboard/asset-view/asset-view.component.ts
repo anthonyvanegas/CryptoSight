@@ -29,6 +29,7 @@ export class AssetViewComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy() {
+    this.assetService.clearAssets();
     this.assetsSub.unsubscribe();
   }
 }

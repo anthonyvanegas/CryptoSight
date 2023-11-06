@@ -62,6 +62,7 @@ export class MainscreenComponent implements OnInit, OnDestroy{
     this.assetsSub.unsubscribe();
     this.availableSymbolsSub.unsubscribe();
     this.assetService.clearAssets();
+    this.assets = [];
   }
 
 }
