@@ -54,4 +54,8 @@ export class AssetService {
     getAssetsUpdateListener() {
         return this.assetsUpdated.asObservable();
     }
+
+    clearAssets() {
+        this.assets = [];
+    }
 }

@@ -4,6 +4,7 @@ import { User } from '../user.model';
 import { UserService } from '../user.service';
 import { Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -16,7 +17,8 @@ export class SignUpComponent implements OnInit, OnDestroy{
   private usersSub: Subscription = new Subscription;
   private userState: boolean = false;
 
-  constructor(public userService: UserService, public http: HttpClient) {}
+  constructor(public userService: UserService, 
+              public http: HttpClient, private router: Router) {}
 
   ngOnInit() {
     this.userService.getUsers();
@@ -47,12 +49,9 @@ export class SignUpComponent implements OnInit, OnDestroy{
         email: form.value.email,
         password: form.value.password
       };
-      this.http.post<{message: string}>('http://localhost:3000/api/users', user)
-        .subscribe((responseData) => {
-          console.log(responseData.message);
-          this.users.push(user);
-          form.resetForm();
-        });
+    this.userService.addUser(user);
+    form.resetForm();
+    this.router.navigateByUrl('/dashboard');
     }
   }
 }

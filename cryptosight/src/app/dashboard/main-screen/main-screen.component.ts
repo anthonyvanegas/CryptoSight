@@ -5,6 +5,7 @@ import { AssetService } from '../asset/asset.service';
 import { AvailableSymbolsService } from '../asset/available-symbol.service';
 import { Subscription } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-screen',
@@ -20,7 +21,8 @@ export class MainscreenComponent implements OnInit, OnDestroy{
   displayedColumns: string[] = ['rank', 'symbol', 'name', 'price', 'change24h', 'action'];
   assetsDataSource: MatTableDataSource<Asset> = new MatTableDataSource<Asset>;
 
-  constructor(public assetService: AssetService, public availableSymbolsService: AvailableSymbolsService) {}
+  constructor(public assetService: AssetService, 
+              public availableSymbolsService: AvailableSymbolsService, private router: Router) {}
 
   ngOnInit() {
     this.availableSymbolsService.loadAvailableSymbols();
@@ -40,9 +42,10 @@ export class MainscreenComponent implements OnInit, OnDestroy{
   ngOnDestroy() {
     this.assetsSub.unsubscribe();
     this.availableSymbolsSub.unsubscribe();
+    this.assetService.clearAssets();
   }
 
-  viewAssetDetails(asset: any) {
-    console.log('Asset view clicked!', asset.name);
+  viewAssetDetails(asset: Asset) {
+    this.router.navigate(['/asset-view'], { queryParams: { symbol: asset.symbol } });
   }
 }

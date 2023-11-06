@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { UserService } from '../user.service';
 import { User } from '../user.model';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   private usersSub: Subscription = new Subscription;
   private userState: boolean = true;
 
-  constructor(public userService: UserService) {}
+  constructor(public userService: UserService, private router: Router) {}
 
   ngOnInit() {
     this.userService.getUsers();
@@ -39,8 +40,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   login(form: NgForm) {
     this.isExistingUser = this.users.some(existingUser => (existingUser.email === form.value.email) && (existingUser.password === form.value.password));
     if (form.valid && this.isExistingUser == true) {
-      console.log('Login Successful!')
       form.resetForm();
+      this.router.navigateByUrl('/dashboard');
     }
   }
 }

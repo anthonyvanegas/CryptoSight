@@ -1,6 +1,9 @@
 <mat-toolbar class="dashboard-toolbar">
-    <button mat-icon-button type="button" (click)="logout()">
+    <button mat-icon-button type="button" class="back" (click)="back()">
+      <mat-icon>keyboard_backspace</mat-icon>
+    </button>
+    <button mat-icon-button type="button" class="logout"(click)="logout()">
       <mat-icon>logout</mat-icon>
     </button>
-  </mat-toolbar>
+</mat-toolbar>
 

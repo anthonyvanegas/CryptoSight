@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-header',
@@ -7,8 +8,14 @@ import { Component } from '@angular/core';
 })
 export class DashboardHeaderComponent {
 
+  constructor(private router: Router) { }
+
+  back() {
+    this.router.navigateByUrl('/dashboard');
+  }
+
   logout() {
-    console.log('Logout button clicked!');
+    this.router.navigateByUrl('');
   }
 
 }
