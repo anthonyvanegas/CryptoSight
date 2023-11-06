@@ -20,6 +20,7 @@ export class MainscreenComponent implements OnInit, OnDestroy{
   private availableSymbolsSub: Subscription = new Subscription;
   displayedColumns: string[] = ['rank', 'symbol', 'name', 'price', 'change24h', 'action'];
   assetsDataSource: MatTableDataSource<Asset> = new MatTableDataSource<Asset>;
+  searchQuery: string = '';
 
   constructor(public assetService: AssetService, 
               public availableSymbolsService: AvailableSymbolsService, private router: Router) {}
@@ -36,7 +37,25 @@ export class MainscreenComponent implements OnInit, OnDestroy{
     this.assetsSub = this.assetService.getAssetsUpdateListener()
       .subscribe((assets: Asset[]) => {
         this.assets = assets;
+        this.updateAssetsTable(); // Update the assets table when new assets are received
     });
+  
+  }
+
+  filterAssets(): Asset[] {
+    const searchQueryLower = this.searchQuery.toLowerCase();
+    return this.assets.filter(asset =>
+      asset.symbol.toLowerCase().includes(searchQueryLower) ||
+      asset.name.toLowerCase().includes(searchQueryLower)
+    );
+  }  
+
+  updateAssetsTable() {
+    this.assetsDataSource.data = this.filterAssets();
+  }
+  
+  viewAssetDetails(asset: Asset) {
+    this.router.navigate(['/asset-view'], { queryParams: { symbol: asset.symbol } });
   }
 
   ngOnDestroy() {
@@ -45,7 +64,4 @@ export class MainscreenComponent implements OnInit, OnDestroy{
     this.assetService.clearAssets();
   }
 
-  viewAssetDetails(asset: Asset) {
-    this.router.navigate(['/asset-view'], { queryParams: { symbol: asset.symbol } });
-  }
 }

@@ -12,10 +12,10 @@
         <mat-card-content class="row justify-content-center">
           <mat-form-field appearance="outline" class="dashboard-search-bar">
             <mat-label>Search for a cryptocurrency</mat-label>
-            <input matInput type="text" placeholder="Enter a cryptocurrency name">
-          </mat-form-field>
+            <input matInput type="text" placeholder="Enter a cryptocurrency name" [(ngModel)]="searchQuery" (input)="updateAssetsTable()">
+          </mat-form-field>       
 
-          <mat-table [dataSource]="assets">
+          <mat-table [dataSource]="assetsDataSource">
             <ng-container matColumnDef="rank">
               <mat-header-cell *matHeaderCellDef>Rank</mat-header-cell>
               <mat-cell *matCellDef="let asset">{{asset.rank}}</mat-cell>
