@@ -1,13 +1,13 @@
+require('dotenv').config();
+
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const fs = require('fs');
 
 async function getAssetData(symbol) {
-    const apiKey = JSON.parse(fs.readFileSync('./config.json')).apiKey;
-    const response = await axios.get('https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest', {
+    const response = await axios.get(process.env.API_URL, {
       headers: {
-        'X-CMC_PRO_API_KEY': apiKey,
+        'X-CMC_PRO_API_KEY': process.env.API_KEY,
       },
       params: {
         'symbol': symbol

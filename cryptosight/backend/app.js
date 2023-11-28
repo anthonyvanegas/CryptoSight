@@ -1,7 +1,8 @@
+require('dotenv').config();
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const fs = require('fs');
 
 const availableSymbolRoutes = require('./routes/availablesymbols')
 const assetsRoutes = require('./routes/assets');
@@ -9,7 +10,7 @@ const usersRoutes = require('./routes/users');
 
 const app = express();
 
-mongoose.connect(JSON.parse(fs.readFileSync('./config.json')).dbCred)
+mongoose.connect(process.env.DB_CONNECTION_STRING)
     .then(() => {
         console.log("Database connected")
     })
