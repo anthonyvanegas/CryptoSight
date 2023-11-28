@@ -1,6 +1,6 @@
 // From Maximilian Schwarzmüller (https://www.udemy.com/course/angular-2-and-nodejs-the-practical-guide/)
 
-const app = require("./backend/app");
+const app = require("./app");
 const debug = require("debug")("node-angular");
 const http = require("http");
 
